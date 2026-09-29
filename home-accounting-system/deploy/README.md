@@ -2,7 +2,10 @@
 
 Vendored copy of [z17/home-accounting-system](https://github.com/z17/home-accounting-system)
 (GPL, see `../LICENSE`) at upstream commit `7c02aae`, plus the deploy helpers in
-this folder. Nothing in `../app` or `../server` has been modified.
+this folder. Nothing in `../app` or `../server` has been modified. The only
+deviation from upstream is a `log.txt` rule appended to `../.gitignore`:
+`Functions::writeLog()` writes to a relative path, so the log lands in whatever
+directory the server was started from, and upstream's `/*.log` does not match it.
 
 ## What this project actually is
 

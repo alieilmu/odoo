@@ -8,3 +8,8 @@
 /server/www/Cromberg/Config.php
 /*.log
 /*.db
+
+# Runtime log written by Functions::writeLog() at Config::$log_file, which
+# defaults to the relative path 'log.txt' - so it lands in whatever directory
+# the server process was started from. Upstream's /*.log does not match it.
+log.txt
