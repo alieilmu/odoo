@@ -1,0 +1,41 @@
+name: Build
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - dev
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      - name: Build
+        run: |
+          cd app
+          npm install --force
+          npm run react-build
+
+      - name: Dist
+        run: |
+          cd app
+          npm run dist
+
+
+      - name: Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }}
+          path: app/dist/
+          if-no-files-found: warn
